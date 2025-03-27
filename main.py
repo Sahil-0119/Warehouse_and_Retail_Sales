@@ -34,6 +34,24 @@ plt.xlabel('Retail Sales', fontsize=14)
 plt.ylabel('Warehouse Sales', fontsize=14)
 plt.grid(True)
 plt.legend(title='Year')
-
-# Display the plot
 plt.show()
+
+# Creating Line graph which compare sales trends over time.
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
+fd = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(fd)
+# Line plot for Retail Sales per Item Type
+plt.figure(figsize=(100, 60))
+sns.lineplot(x="ITEM TYPE", y="RETAIL SALES", hue="YEAR", style="YEAR", markers=True, data=df, palette="coolwarm")
+
+plt.xlabel("Item Type")
+plt.ylabel("Retail Sales")
+plt.title("Retail Sales by Item Type and Warehouse")
+plt.xticks(rotation=45)
+plt.legend(title="Warehouse")
+plt.grid(True)
+plt.show()
+
