@@ -4,7 +4,11 @@ import numpy as np
 import seaborn as sns
 fd = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
 data = pd.read_csv(fd)
-
+# Display dataset information
+data.info()
+print("\nDataset Summary:\n", data.describe())
+print("\nMissing Values in Each Column:\n", data.isnull().sum())
+print("\nColumn Names:\n", data.columns)
 # Counting no. of item types and their values in the dataset
 item_type= data['ITEM TYPE'].value_counts() # value_counts() is used to count unique value in the column
 
