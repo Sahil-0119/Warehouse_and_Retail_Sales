@@ -95,3 +95,33 @@ plt.yticks(fontsize=11)
 plt.legend(title='Item Type', fontsize=11)
 plt.grid(True, linestyle='--', alpha=0.6)
 plt.show()
+
+#------------------------------------------------------------------------------------------------------------------------
+#   "Boxplot of Warehouse Sales"
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+file_path = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(file_path)
+column = 'WAREHOUSE SALES'# we can also create for RETAIL SALES,RETAIL TRANSFERS,WAREHOUSE SALES
+
+# Calculate Q1 (25th percentile) and Q3 (75th percentile)
+Q1 = df[column].quantile(0.25)
+Q3 = df[column].quantile(0.75)
+
+# Calculate IQR (Interquartile Range)
+IQR = Q3 - Q1
+lower_bound = Q1 - 1.5 * IQR
+upper_bound = Q3 + 1.5 * IQR
+outliers = df[(df[column] < lower_bound) | (df[column] > upper_bound)]
+print("Outliers detected:")
+print(outliers)
+plt.figure(figsize=(8, 5))
+sns.boxplot(x=df[column], color='skyblue')
+
+# Customize plot
+plt.title(f'Boxplot of {column}', fontsize=14, fontweight='bold')#Uses an f-string to dynamically insert the column name into the title.
+plt.xlabel(column, fontsize=12)
+plt.show()
