@@ -68,3 +68,30 @@ sns.pairplot(df, hue="YEAR", palette="warmcool", diag_kind="kde")
 
 plt.show()
 
+
+
+#-------------------------------------------------------------------------------------------------------
+#Stock Movement and Retail Transfers Over Time by Item Type
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+file_path = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(file_path)
+
+# Convert YEAR and MONTH into a datetime format
+df['DATE'] = pd.to_datetime(df[['YEAR', 'MONTH']].assign(DAY=1))
+
+# Aggregate total retail transfers by date and item type
+stock_movement = df.groupby(['DATE', 'ITEM TYPE'])['RETAIL TRANSFERS'].sum().reset_index()
+sns.set_style("darkgrid")
+plt.figure(figsize=(14, 7))
+sns.lineplot(x='DATE', y='RETAIL TRANSFERS', hue='ITEM TYPE', data=stock_movement,
+             marker='o', linestyle='-', linewidth=2, markersize=6, palette='tab10')
+plt.xlabel('Time', fontsize=13)
+plt.ylabel('Total Retail Transfers', fontsize=13)
+plt.title('Stock Movement and Retail Transfers Over Time by Item Type', fontsize=16, fontweight='bold')
+plt.xticks(rotation=45, fontsize=11)
+plt.yticks(fontsize=11)
+plt.legend(title='Item Type', fontsize=11)
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.show()
