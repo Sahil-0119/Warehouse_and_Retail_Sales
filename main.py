@@ -125,3 +125,32 @@ sns.boxplot(x=df[column], color='skyblue')
 plt.title(f'Boxplot of {column}', fontsize=14, fontweight='bold')#Uses an f-string to dynamically insert the column name into the title.
 plt.xlabel(column, fontsize=12)
 plt.show()
+
+#----------------------------------------------------------------------------------------------------------------
+#   Stacked Area Chart: Retail and Warehouse Sales Over Time
+
+import pandas as pd
+import matplotlib.pyplot as plt
+file_path = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(file_path)
+df['DATE'] = pd.to_datetime(df[['YEAR', 'MONTH']].assign(DAY=1))#converting month and year in a single date starting with 1
+
+# Aggregate Retail and Warehouse Sales over time
+area_data = df.groupby('DATE')[['RETAIL SALES', 'WAREHOUSE SALES']].sum().reset_index()
+
+# Plot stacked area chart
+plt.figure(figsize=(14, 7))
+plt.stackplot(area_data['DATE'], 
+              area_data['RETAIL SALES'], 
+              area_data['WAREHOUSE SALES'], 
+              labels=['Retail Sales', 'Warehouse Sales'], 
+              colors=['skyblue', 'lightgreen'], alpha=0.8)
+
+plt.title('Stacked Area Chart: Retail and Warehouse Sales Over Time', fontsize=16, fontweight='bold')
+plt.xlabel('Date', fontsize=13)
+plt.ylabel('Sales', fontsize=13)
+plt.legend(loc='upper left')
+plt.grid(True, linestyle='--', alpha=0.5)
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
