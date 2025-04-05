@@ -20,7 +20,7 @@ plt.title('Distribution of Item Types with Percentage')
 plt.show()
 
 
-# creating a Scattor plot Retail V/S Warehouse Sales
+#  1 creating a Scattor plot Retail V/S Warehouse Sales
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -36,7 +36,7 @@ plt.grid(True)
 plt.legend(title='Year')
 plt.show()
 
-# Creating Line graph which compare sales trends over time.
+# 2 Creating Line graph which compare sales trends over time.
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -55,7 +55,7 @@ plt.legend(title="Warehouse")
 plt.grid(True)
 plt.show()
 
-
+#-------------------------------------------------------------------------------------------------------------------------------------
 
 import pandas as pd
 import seaborn as sns
@@ -71,7 +71,7 @@ plt.show()
 
 
 #-------------------------------------------------------------------------------------------------------
-#Stock Movement and Retail Transfers Over Time by Item Type
+# 3 Stock Movement and Retail Transfers Over Time by Item Type
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -127,7 +127,7 @@ plt.xlabel(column, fontsize=12)
 plt.show()
 
 #----------------------------------------------------------------------------------------------------------------
-#   Stacked Area Chart: Retail and Warehouse Sales Over Time
+#  4 Stacked Area Chart: Retail and Warehouse Sales Over Time
 
 import pandas as pd
 import matplotlib.pyplot as plt
