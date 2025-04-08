@@ -20,6 +20,7 @@ plt.title('Distribution of Item Types with Percentage')
 plt.show()
 
 
+#------------------------------------------------------------------------------------------------------------------------------
 #  1 creating a Scattor plot Retail V/S Warehouse Sales
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -36,6 +37,8 @@ plt.grid(True)
 plt.legend(title='Year')
 plt.show()
 
+
+#--------------------------------------------------------------------------------------------------------------------------------
 # 2 Creating Line graph which compare sales trends over time.
 import matplotlib.pyplot as plt
 import numpy as np
@@ -152,5 +155,29 @@ plt.ylabel('Sales', fontsize=13)
 plt.legend(loc='upper left')
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+
+#---------------------------------------------------------------------------------------------------------------------------------------
+# 5 Top Performing Suppliers 
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load dataset
+file_path = "C:\\Users\\moon\\OneDrive\\Desktop\\project of datatool box\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(file_path)
+
+# Convert YEAR and MONTH into datetime for time-series plots
+df['DATE'] = pd.to_datetime(df[['YEAR', 'MONTH']].assign(DAY=1))
+supplier_sales = df.groupby('SUPPLIER')['RETAIL SALES'].sum().sort_values(ascending=False).head(10)
+
+plt.figure(figsize=(12, 6))
+sns.barplot(x=supplier_sales.values, y=supplier_sales.index, palette='viridis')
+plt.title('Top 10 Performing Suppliers by Retail Sales', fontsize=16, fontweight='bold')
+plt.xlabel('Total Retail Sales')
+plt.ylabel('Supplier')
+plt.grid(axis='x', linestyle='--', alpha=0.6)
 plt.tight_layout()
 plt.show()
