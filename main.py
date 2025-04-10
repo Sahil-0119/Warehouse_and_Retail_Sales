@@ -181,3 +181,41 @@ plt.ylabel('Supplier')
 plt.grid(axis='x', linestyle='--', alpha=0.6)
 plt.tight_layout()
 plt.show()
+
+#------------------------------------------------------------------------------------------------------------
+#-----Retail Transfers Distribution by Year----------
+
+import pandas as pd
+from statsmodels.stats.weightstats import ztest
+import matplotlib.pyplot as plt
+import seaborn as sns
+file_path = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(file_path)
+
+# Drop NA values in RETAIL TRANSFERS to avoid errors
+retail_transfers = df['RETAIL TRANSFERS'].dropna()
+
+# Hypothetical population mean (e.g., 5000)
+population_mean = 5000
+
+# Perform Z-test
+z_value, p_value = ztest(retail_transfers, value=population_mean)
+
+print("Z-Test for Retail Transfers against population mean of 5000:")
+print(f"Z-statistic: {z_value:.4f}")
+print(f"P-value: {p_value:.4f}")
+alpha = 0.05
+if p_value < alpha:
+    print("Result: Reject the null hypothesis. There is a significant difference between the sample mean and the population mean.")
+else:
+    print("Result: Fail to reject the null hypothesis. There is no significant difference between the sample mean and the population mean.")
+
+# Optional visualization by year
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='YEAR', y='RETAIL TRANSFERS', data=df, hue='YEAR',palette='coolwarm')
+plt.title('Retail Transfers Distribution by Year', fontsize=16, fontweight='bold')
+plt.xlabel('Year')
+plt.ylabel('Retail Transfers')
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+plt.show()
