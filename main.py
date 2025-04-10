@@ -197,12 +197,10 @@ retail_transfers = df['RETAIL TRANSFERS'].dropna()
 
 # Hypothetical population mean (e.g., 5000)
 population_mean = 5000
-
-# Perform Z-test
 z_value, p_value = ztest(retail_transfers, value=population_mean)
 
 print("Z-Test for Retail Transfers against population mean of 5000:")
-print(f"Z-statistic: {z_value:.4f}")
+print(f"Z-value: {z_value:.4f}")
 print(f"P-value: {p_value:.4f}")
 alpha = 0.05
 if p_value < alpha:
