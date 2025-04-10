@@ -217,3 +217,45 @@ plt.ylabel('Retail Transfers')
 plt.grid(True, linestyle='--', alpha=0.6)
 plt.tight_layout()
 plt.show()
+
+
+#--------------------------------------------------------------------------------------------------
+
+import pandas as pd
+from scipy.stats import ttest_rel
+import matplotlib.pyplot as plt
+import seaborn as sns
+file_path = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
+df = pd.read_csv(file_path)
+
+# Drop any rows with missing values in the required columns
+sales_data = df[['RETAIL SALES', 'WAREHOUSE SALES']].dropna()
+stat, p_value = ttest_rel(sales_data['RETAIL SALES'], sales_data['WAREHOUSE SALES'])
+print("Paired T-Test Result:")
+print("T-statistic:", stat)
+print("P-value:", p_value)
+
+# Conclusion
+if p_value < 0.05:
+    print("\nConclusion: We reject the null hypothesis. There is a significant difference between Retail and Warehouse Sales.")
+else:
+    print("\nConclusion: We fail to reject the null hypothesis. There is no significant difference between Retail and Warehouse Sales.")
+
+
+df['DATE'] = pd.to_datetime(df[['YEAR', 'MONTH']].assign(DAY=1))
+
+# Aggregate sales data over time
+grouped = df.groupby('DATE')[['RETAIL SALES', 'WAREHOUSE SALES']].sum().reset_index()
+
+# Line Plot for Sales Trends
+df = df.sort_values('DATE')
+plt.figure(figsize=(14, 6))
+sns.lineplot(data=grouped, x='DATE', y='RETAIL SALES', label='Retail Sales', marker='o')
+sns.lineplot(data=grouped, x='DATE', y='WAREHOUSE SALES', label='Warehouse Sales', marker='s')
+plt.title('Retail vs Warehouse Sales Trend Over Time')
+plt.xlabel('Date')
+plt.ylabel('Sales Amount')
+plt.legend()
+plt.grid(True, linestyle='--', alpha=0.6)
+plt.tight_layout()
+plt.show()
