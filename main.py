@@ -63,11 +63,10 @@ plt.show()
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
+
 fd = "C:\\Users\\moon\\OneDrive\\Desktop\\Warehouse_and_Retail_Sales.csv"
 df = pd.read_csv(fd)
-
-# Create Pairplot (Only for Numerical Columns)
-sns.pairplot(df, hue="YEAR", palette="warmcool", diag_kind="kde")
+sns.pairplot(df, hue="YEAR", palette="coolwarm", diag_kind="kde")
 
 plt.show()
 
