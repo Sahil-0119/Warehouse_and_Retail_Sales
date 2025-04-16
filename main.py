@@ -154,7 +154,7 @@ plt.ylabel('Sales', fontsize=13)
 plt.legend(loc='upper left')
 plt.grid(True, linestyle='--', alpha=0.5)
 plt.xticks(rotation=45)
-plt.tight_layout()
+plt.tight_layout()        #Adjusts spacing automatically so labels don’t get cut off.
 plt.show()
 
 
