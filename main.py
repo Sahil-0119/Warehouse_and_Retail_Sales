@@ -138,7 +138,7 @@ df = pd.read_csv(file_path)
 df['DATE'] = pd.to_datetime(df[['YEAR', 'MONTH']].assign(DAY=1))#converting month and year in a single date starting with 1
 
 # Aggregate Retail and Warehouse Sales over time
-area_data = df.groupby('DATE')[['RETAIL SALES', 'WAREHOUSE SALES']].sum().reset_index()
+area_data = df.groupby('DATE')[['RETAIL SALES', 'WAREHOUSE SALES']].sum().reset_index()#reset_index() turns 'DATE' back into a regular column
 
 # Plot stacked area chart
 plt.figure(figsize=(14, 7))
